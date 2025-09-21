@@ -58,8 +58,8 @@ A sophisticated Retrieval-Augmented Generation (RAG) application that allows you
 ## 🚀 Running the Application
 
 ### Create a .env file in backend folder
- HUGGINGFACE_API_KEY=Your_Api_Key
- GROQ_API_KEY= Your_Api_Key
+- HUGGINGFACE_API_KEY=Your_Api_Key
+- GROQ_API_KEY= Your_Api_Key
 
 
 ### Start the Backend Server
