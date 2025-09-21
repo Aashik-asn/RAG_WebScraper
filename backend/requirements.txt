@@ -1,0 +1,11 @@
+flask
+requests
+beautifulsoup4
+tqdm
+numpy
+scikit-learn
+sentence-transformers
+groq
+transformers
+torch
+python-dotenv
