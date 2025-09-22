@@ -310,3 +310,25 @@ def get_conversation_count(db_path):
     count = c.fetchone()[0]
     conn.close()
     return count
+
+def get_all_chat_sessions(db_path):
+    """Return all chat sessions and their messages."""
+    conn = get_db_conn(db_path)
+    c = conn.cursor()
+    c.execute('SELECT session_id, role, message, created_at FROM chats ORDER BY created_at ASC')
+    rows = c.fetchall()
+    conn.close()
+    sessions = {}
+    for session_id, role, message, created_at in rows:
+        if session_id not in sessions:
+            sessions[session_id] = {
+                'name': session_id,
+                'messages': [],
+                'created_at': created_at
+            }
+        sessions[session_id]['messages'].append({
+            'role': role,
+            'content': message,
+            'timestamp': created_at
+        })
+    return sessions

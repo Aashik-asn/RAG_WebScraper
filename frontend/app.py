@@ -5,6 +5,27 @@ from datetime import datetime
 
 API = st.secrets.get('API_BASE') if 'API_BASE' in st.secrets else os.environ.get('API_BASE','http://localhost:8000')
 
+def load_chat_sessions_from_backend():
+    try:
+        r = requests.get(f'{API}/chat_sessions')
+        if r.status_code == 200:
+            sessions = r.json()
+            # Convert keys to str (in case session_id is not str)
+            sessions = {str(k): v for k, v in sessions.items()}
+            return sessions
+    except Exception as e:
+        st.warning(f"Could not load chat sessions: {e}")
+    return {}
+
+# Restore chat sessions from backend on first load
+if 'chat_sessions' not in st.session_state or not st.session_state['chat_sessions']:
+    st.session_state['chat_sessions'] = load_chat_sessions_from_backend()
+    # Set the most recent session as current, if any
+    if st.session_state['chat_sessions']:
+        st.session_state['current_session'] = list(st.session_state['chat_sessions'].keys())[-1]
+    else:
+        st.session_state['current_session'] = None
+
 st.set_page_config(page_title='RAG App', layout='wide')
 
 # Initialize session state

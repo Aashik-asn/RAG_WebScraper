@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from ingest import crawler_ingest
-from rag import init_store, add_document, chat_with_retrieval, get_stats, get_urls, delete_document, get_document_content, get_all_documents, delete_all_documents, delete_chat_session, delete_all_chat_sessions
+from rag import init_store, add_document, chat_with_retrieval, get_stats, get_urls, delete_document, get_document_content, get_all_documents, delete_all_documents, delete_chat_session, delete_all_chat_sessions, get_all_chat_sessions
 import os
 
 app = Flask(__name__)
@@ -81,6 +81,10 @@ def delete_chat_session_endpoint():
 def delete_all_chat_sessions_endpoint():
     deleted_count = delete_all_chat_sessions(DB_PATH)
     return jsonify({'success': True, 'deleted_count': deleted_count})
+
+@app.route('/chat_sessions', methods=['GET'])
+def chat_sessions():
+    return jsonify(get_all_chat_sessions(DB_PATH))
 
 if __name__ == '__main__':
     app.run(port=8000, debug=True)
