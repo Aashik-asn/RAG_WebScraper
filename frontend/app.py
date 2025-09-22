@@ -35,8 +35,8 @@ with tabs[0]:
     
     col1, col2, col3 = st.columns(3)
     col1.metric('URLs ingested', stats.get('docs',0))
-    col2.metric('Conversations', stats.get('conversations',0))
-    col3.metric('Queries', stats.get('queries',0))
+    col2.metric('Sessions', stats.get('conversations',0))
+    col3.metric('Queries Solved', stats.get('queries',0))
     
     col1, col2 = st.columns([3, 1])
     with col1:
