@@ -38,9 +38,9 @@ if 'ingestion_results' not in st.session_state:
 
 st.title('RAG App - Dashboard / Ingest / Chat')
 
-tabs = st.tabs(['Dashboard','Ingestion','Chat'])
+tabs = st.tabs(['About','Dashboard','Ingestion','Chat'])
 
-with tabs[0]:
+with tabs[1]:
     col1, col2 = st.columns([3, 1])
     with col1:
         st.header('Dashboard')
@@ -56,8 +56,8 @@ with tabs[0]:
     
     col1, col2, col3 = st.columns(3)
     col1.metric('URLs ingested', stats.get('docs',0))
-    col2.metric('Conversations', stats.get('conversations',0))
-    col3.metric('Queries', stats.get('queries',0))
+    col2.metric('Sessions', stats.get('conversations',0))
+    col3.metric('Queries Solved', stats.get('queries',0))
     
     col1, col2 = st.columns([3, 1])
     with col1:
@@ -98,7 +98,7 @@ with tabs[0]:
     except Exception as e:
         st.error(f"Error fetching URLs: {e}")
 
-with tabs[1]:
+with tabs[2]:
     st.header('Ingestion')
     
     # Create sub-tabs for ingestion
@@ -167,7 +167,7 @@ with tabs[1]:
         except Exception as e:
             st.error(f"Error fetching documents: {e}")
 
-with tabs[2]:
+with tabs[3]:
     st.header('Interactive Chat')
     
     # Create two columns: sidebar for sessions and main chat area
@@ -414,3 +414,54 @@ with tabs[2]:
                             st.error(f"Error: {response.text}")
                     except Exception as e:
                         st.error(f"Error: {str(e)}")
+with tabs[0]:
+    st.header("About This Application")
+
+    st.subheader("What is this?")
+    st.markdown("""
+    This application is a sophisticated **web scraping and AI-powered chat platform** designed to help users easily extract, store, and interact with web content.  
+    It is perfect for anyone who wants to transform lengthy webpages into concise, searchable insights without needing programming knowledge.
+    """)
+
+    st.subheader("How It Works")
+    st.markdown("""
+    The process is straightforward yet powerful:  
+    1. **Scraping:** Simply input the URL of a webpage, and the system automatically extracts the relevant text content for you.  
+    2. **Storage:** The extracted data is securely saved into a database, ensuring your information is organized and persistent.  
+    3. **Processing:** A backend API efficiently indexes and prepares the content for quick retrieval and natural language querying.  
+    4. **Chat Interaction:** Engage with the content by asking detailed questions, getting instant, AI-generated answers based on the scraped material.
+    """)
+
+    st.subheader("Key Features")
+    st.markdown("""
+    - Automated **web scraping** for hassle-free content extraction  
+    - **Conversational AI chat interface** to query and explore data naturally  
+    - Support for **multiple URLs and data sources**, enabling wide-ranging research  
+    - Intuitive, clean, and **responsive interface** suitable for all users  
+    - Privacy-conscious and secure **data storage mechanism**  
+    """)
+
+    st.subheader("Why Use This Application?")
+    st.markdown("""
+    - **Save hours** by avoiding manual reading and note-taking from lengthy web pages  
+    - Gain **quick insights** from complex or extensive information  
+    - Ideal for **researchers, students, analysts, and curious minds** who need rapid access to knowledge  
+    - No prior technical skills required — **user-friendly design with clear navigation**  
+    - Accessible on any device with a modern web browser  
+    """)
+
+    st.subheader("How to Use")
+    st.markdown("""
+    Getting started is simple and intuitive:  
+    1. **Enter URL:** Paste the link of the webpage you want to analyze.  
+    2. **Scrape Content:** Click the scrape button to extract the relevant information automatically.  
+    3. **View & Store:** Review the scraped content and it will be saved securely in the system.  
+    4. **Ask Questions:** Use the chat interface to query the data in natural language.  
+    5. **Refine & Explore:** Continue interacting, adding multiple URLs, and exploring insights seamlessly.
+    """)
+
+    st.divider()
+    st.info("""
+    This project combines the power of automated data extraction with cutting-edge AI to make web information accessible and interactive like never before.  
+    Whether for academic work, market research, or general learning, this tool adapts to your needs and streamlines information discovery.
+    """)
